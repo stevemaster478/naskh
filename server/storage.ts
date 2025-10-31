@@ -1,4 +1,4 @@
-// Storage per l'applicazione Naṣkh
+// Storage per l'applicazione Naskh
 // Non serve persistenza dati utente per questa applicazione stateless
 
 export interface IStorage {

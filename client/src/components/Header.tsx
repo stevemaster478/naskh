@@ -6,7 +6,7 @@ export default function Header() {
       <div className="max-w-4xl mx-auto px-6 md:px-16 h-16 md:h-20 flex items-center justify-between">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Naṣkh
+            Naskh
           </h1>
           <p className="text-xs text-muted-foreground hidden md:block">
             Trascrizione DIN 31635

@@ -1,8 +1,8 @@
-# Naṣkh - Arabic Transliteration Tool
+# Naskh - Arabic Transliteration Tool
 
 ## Overview
 
-Naṣkh is a web application designed for Muslim Salafi students, translators, and researchers in Italy (with plans to expand to English and Arabic-speaking audiences). The application provides Arabic-to-Latin transliteration services following the DIN 31635 standard. Users can convert text between Latin characters, Arabic script, and standardized DIN 31635 transliteration.
+Naskh is a web application designed for Muslim Salafi students, translators, and researchers in Italy (with plans to expand to English and Arabic-speaking audiences). The application provides Arabic-to-Latin transliteration services following the DIN 31635 standard. Users can convert text between Latin characters, Arabic script, and standardized DIN 31635 transliteration.
 
 The application employs a hybrid approach: first checking a static dictionary of common Islamic terms, then falling back to Google Gemini AI for unknown terms. All AI-generated conversions are logged for future dictionary integration.
 

@@ -79,7 +79,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 md:px-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-arabic">
-              Benvenuto su Naṣkh
+              Benvenuto su Naskh
             </h2>
             <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Converti e traslittera testi arabi e latini secondo lo standard

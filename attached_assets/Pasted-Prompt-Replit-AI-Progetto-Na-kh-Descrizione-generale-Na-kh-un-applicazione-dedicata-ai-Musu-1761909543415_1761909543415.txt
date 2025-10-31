@@ -1,8 +1,8 @@
-Prompt Replit AI — Progetto Naṣkh
+Prompt Replit AI — Progetto Naskh
 
 📘 Descrizione generale
 
-Naṣkh è un’applicazione dedicata ai Musulmani salafiti in Italia — e successivamente destinata al mondo anglofono e arabo — che permette di correggere, convertire e traslitterare testi arabi e latini in conformità con lo standard DIN 31635.
+Naskh è un’applicazione dedicata ai Musulmani salafiti in Italia — e successivamente destinata al mondo anglofono e arabo — che permette di correggere, convertire e traslitterare testi arabi e latini in conformità con lo standard DIN 31635.
 
 Lo scopo è fornire uno strumento linguistico islamico moderno, utile per studenti di ʿilm, traduttori, ricercatori e studenti di lingua araba che desiderano uniformare la scrittura delle parole arabe in caratteri latini o viceversa.
 

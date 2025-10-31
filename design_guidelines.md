@@ -1,4 +1,4 @@
-# Design Guidelines: Naṣkh - Arabic Transliteration Tool
+# Design Guidelines: Naskh - Arabic Transliteration Tool
 
 ## Design Approach
 

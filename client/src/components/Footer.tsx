@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-4xl mx-auto px-6 md:px-16">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <h3 className="font-semibold text-lg mb-1">Naṣkh</h3>
+            <h3 className="font-semibold text-lg mb-1">Naskh</h3>
             <p className="text-sm text-muted-foreground">
               Strumento di trascrizione arabo-latino secondo DIN 31635
             </p>
