@@ -30,10 +30,11 @@ export default function Home() {
     if (!inputText.trim()) return;
 
     setLoading(true);
+    setOutputText("");
     console.log("Conversione iniziata:", { mode, inputText });
 
     try {
-      const response = await fetch("/api/convert", {
+      const response = await fetch("/api/convert/stream", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,17 +49,75 @@ export default function Home() {
         throw new Error("Errore durante la conversione");
       }
 
-      const data: ConversionResponse = await response.json();
+      const contentType = response.headers.get("content-type");
       
-      setOutputText(data.result);
-      setIsAI(data.source === "ai");
+      if (contentType?.includes("application/json")) {
+        const data = await response.json();
+        setOutputText(data.result);
+        setIsAI(data.source === "ai");
+        
+        toast({
+          title: "Conversione completata",
+          description: data.cached 
+            ? "Risultato dalla cache" 
+            : data.source === "ai"
+              ? "Conversione effettuata con AI" 
+              : "Conversione dal dizionario statico",
+        });
+        setLoading(false);
+        return;
+      }
 
-      toast({
-        title: "Conversione completata",
-        description: data.source === "ai" 
-          ? "Conversione effettuata con AI" 
-          : "Conversione dal dizionario statico",
-      });
+      if (contentType?.includes("text/event-stream")) {
+        setOutputText("");
+        setIsAI(true);
+        
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        if (!reader) {
+          throw new Error("Stream non disponibile");
+        }
+
+        while (true) {
+          const { done, value } = await reader.read();
+          
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n\n");
+          
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const jsonData = line.slice(6);
+              try {
+                const parsed = JSON.parse(jsonData);
+                
+                if (parsed.error) {
+                  throw new Error(parsed.error);
+                }
+                
+                if (parsed.done) {
+                  setOutputText(parsed.fullResult || "");
+                  toast({
+                    title: "Conversione completata",
+                    description: "Conversione effettuata con AI in streaming",
+                  });
+                } else if (parsed.chunk) {
+                  setOutputText((prev) => prev + parsed.chunk);
+                }
+              } catch (parseError) {
+                console.error("Errore parsing SSE:", parseError);
+              }
+            }
+          }
+        }
+
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Errore conversione:", error);
       toast({
@@ -66,7 +125,6 @@ export default function Home() {
         description: "Si è verificato un errore durante la conversione",
         variant: "destructive",
       });
-    } finally {
       setLoading(false);
     }
   };

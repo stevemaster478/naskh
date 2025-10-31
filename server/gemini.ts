@@ -60,7 +60,7 @@ Testo convertito:`
 };
 
 /**
- * Converte testo usando Google Gemini AI
+ * Converte testo usando Google Gemini AI (versione standard non-streaming)
  */
 export async function convertWithAI(
   text: string,
@@ -88,6 +88,38 @@ export async function convertWithAI(
     return convertedText;
   } catch (error) {
     console.error("Errore conversione Gemini:", error);
+    throw new Error("Errore durante la conversione AI");
+  }
+}
+
+/**
+ * Converte testo usando Google Gemini AI con streaming
+ * Restituisce un async generator che emette chunks di testo progressivamente
+ */
+export async function* convertWithAIStream(
+  text: string,
+  mode: ConversionMode
+): AsyncGenerator<string, void, unknown> {
+  try {
+    const prompt = conversionPrompts[mode](text);
+    
+    const responseStream = await ai.models.generateContentStream({
+      model: "gemini-2.5-flash",
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: prompt }]
+        }
+      ],
+    });
+    
+    for await (const chunk of responseStream) {
+      if (chunk.text) {
+        yield chunk.text;
+      }
+    }
+  } catch (error) {
+    console.error("Errore conversione Gemini streaming:", error);
     throw new Error("Errore durante la conversione AI");
   }
 }

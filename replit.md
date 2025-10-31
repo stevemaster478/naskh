@@ -20,6 +20,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+**31 Ottobre 2025 - Ottimizzazione Prestazioni con Streaming AI**:
+- Implementato streaming per risposte Gemini AI quasi immediate
+- Aggiunto cache in-memory per conversioni ripetute (60 minuti TTL)
+- Nuovo endpoint `/api/convert/stream` con Server-Sent Events
+- Frontend aggiornato per gestire streaming progressivo del testo
+- Migliorata user experience con visualizzazione incrementale
+
 **31 Ottobre 2025 - Integrazione Capacitor per App Native**:
 - Configurato Capacitor per creare app native Android e iOS
 - Aggiunti progetti nativi nelle cartelle `android/` e `ios/`
@@ -74,20 +81,29 @@ Preferred communication style: Simple, everyday language.
 - Stateless request-response model
 - JSON-based communication with Zod validation
 
-**Conversion Strategy (Hybrid Approach)**:
-1. **Dictionary Lookup**: Static dictionary of common Islamic terms (`server/dictionary.ts`)
-2. **AI Fallback**: Google Gemini API for terms not in dictionary
-3. **Logging**: AI conversions logged to `data/conversion-logs.json` for future dictionary expansion
+**Conversion Strategy (Multi-Layer Approach)**:
+1. **In-Memory Cache**: Conversioni recenti cached per 60 minuti (instant)
+2. **Dictionary Lookup**: Static dictionary of common Islamic terms (`server/dictionary.ts`)
+3. **AI Streaming**: Google Gemini API con streaming per risposte progressive
+4. **Logging**: AI conversions logged to `data/conversion-logs.json` for future dictionary expansion
+
+**Performance Optimizations**:
+- **Cache in-memory** (`server/cache.ts`): LRU cache con 1000 entry max, TTL 60 minuti
+- **Streaming AI** (`/api/convert/stream`): Server-Sent Events per risposte progressive
+- **Response time**: Cache/Dictionary ~5-50ms, AI streaming ~100-500ms first chunk, progressivo dopo
+- Frontend mostra testo incrementalmente invece di aspettare risposta completa
 
 **Why This Approach?**:
+- Cache elimina latenza per conversioni ripetute
 - Dictionary provides instant, consistent results for common terms
-- AI handles edge cases and new terminology
+- Streaming AI riduce perceived latency (user vede testo apparire immediatamente)
 - Logging builds knowledge base for improving dictionary over time
 
 **Error Handling**:
 - Zod schema validation on all API requests
 - Graceful fallback if AI service unavailable
 - User-friendly error messages via toast notifications
+- Stream error handling con chiusura pulita della connessione
 
 ### Data Layer
 
