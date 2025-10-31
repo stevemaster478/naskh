@@ -56,10 +56,10 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     fs: {
-      strict: true,
-      deny: ["**/.*"],
+      strict: false,
+      deny: [],
     },
   },
 });
