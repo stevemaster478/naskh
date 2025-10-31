@@ -30,5 +30,21 @@
     "outputText": "ibn al-Qayyim raḥimahullāh",
     "mode": "latin-to-din",
     "source": "ai"
+  },
+  {
+    "id": "ee0bbbd4-771f-44ae-8170-811a3acf8cd3",
+    "timestamp": "2025-10-31T12:18:35.190Z",
+    "inputText": "Mustafa",
+    "outputText": "Muṣṭafā",
+    "mode": "latin-to-din",
+    "source": "ai"
+  },
+  {
+    "id": "fe16b5f2-9600-45ea-abe1-80559e033ab8",
+    "timestamp": "2025-10-31T12:24:20.578Z",
+    "inputText": "Rabi' ibn Hadi 'Umayr al-Madkhali",
+    "outputText": "Rabīʿ ibn Hādī ʿUmayr al-Madḫalī",
+    "mode": "latin-to-din",
+    "source": "ai"
   }
 ]
