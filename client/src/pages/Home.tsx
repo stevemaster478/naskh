@@ -9,6 +9,8 @@ import OutputDisplay from "@/components/OutputDisplay";
 import ConversionButton from "@/components/ConversionButton";
 import AIBadge from "@/components/AIBadge";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import type { ConversionResponse } from "@shared/schema";
 
 export default function Home() {
   const [mode, setMode] = useState<ConversionMode>("latin-to-din");
@@ -16,6 +18,7 @@ export default function Home() {
   const [outputText, setOutputText] = useState("");
   const [loading, setLoading] = useState(false);
   const [isAI, setIsAI] = useState(false);
+  const { toast } = useToast();
 
   const placeholders = {
     "latin-to-din": "Inserisci testo latino (es. hadith, salah, rasoul)...",
@@ -29,18 +32,43 @@ export default function Home() {
     setLoading(true);
     console.log("Conversione iniziata:", { mode, inputText });
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/convert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: inputText,
+          mode: mode,
+        }),
+      });
 
-    //todo: remove mock functionality - replace with actual API call
-    const mockConversions: Record<ConversionMode, string> = {
-      "latin-to-din": "ḥadīṯ, ṣalāh, rasūl",
-      "arabic-to-din": "ḥadīṯ, ṣalāh, rasūl",
-      "latin-to-arabic": "حديث، صلاة، علم",
-    };
+      if (!response.ok) {
+        throw new Error("Errore durante la conversione");
+      }
 
-    setOutputText(mockConversions[mode] || inputText);
-    setIsAI(Math.random() > 0.5);
-    setLoading(false);
+      const data: ConversionResponse = await response.json();
+      
+      setOutputText(data.result);
+      setIsAI(data.source === "ai");
+
+      toast({
+        title: "Conversione completata",
+        description: data.source === "ai" 
+          ? "Conversione effettuata con AI" 
+          : "Conversione dal dizionario statico",
+      });
+    } catch (error) {
+      console.error("Errore conversione:", error);
+      toast({
+        title: "Errore",
+        description: "Si è verificato un errore durante la conversione",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -1,18 +1,33 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+export const conversionModeSchema = z.enum([
+  "latin-to-din",
+  "arabic-to-din",
+  "latin-to-arabic",
+]);
+
+export type ConversionMode = z.infer<typeof conversionModeSchema>;
+
+export const conversionRequestSchema = z.object({
+  text: z.string().min(1, "Il testo non può essere vuoto"),
+  mode: conversionModeSchema,
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+export type ConversionRequest = z.infer<typeof conversionRequestSchema>;
+
+export const conversionResponseSchema = z.object({
+  result: z.string(),
+  source: z.enum(["dictionary", "ai"]),
+  mode: conversionModeSchema,
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export type ConversionResponse = z.infer<typeof conversionResponseSchema>;
+
+export interface ConversionLog {
+  id: string;
+  timestamp: Date;
+  inputText: string;
+  outputText: string;
+  mode: ConversionMode;
+  source: "dictionary" | "ai";
+}
