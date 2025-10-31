@@ -9,7 +9,7 @@ export default function Header() {
             Naṣkh
           </h1>
           <p className="text-xs text-muted-foreground hidden md:block">
-            Traslitterazione DIN 31635
+            trascrizione DIN 31635
           </p>
         </div>
         <ThemeToggle />

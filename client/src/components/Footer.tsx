@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <h3 className="font-semibold text-lg mb-1">Naṣkh</h3>
             <p className="text-sm text-muted-foreground">
-              Strumento di traslitterazione arabo-latino secondo DIN 31635
+              Strumento di trascrizione arabo-latino secondo DIN 31635
             </p>
             <p className="text-xs text-muted-foreground mt-2">
               © 2025 - Per studenti di ʿilm, traduttori e ricercatori

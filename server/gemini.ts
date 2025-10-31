@@ -15,9 +15,9 @@ const ai = new GoogleGenAI({ apiKey });
  */
 const conversionPrompts = {
   "latin-to-din": (text: string) => `
-Sei un esperto di traslitterazione araba secondo lo standard DIN 31635.
+Sei un esperto di trascrizione araba secondo lo standard DIN 31635.
 
-Converti il seguente testo latino in traslitterazione DIN 31635:
+Converti il seguente testo latino in trascrizione DIN 31635:
 "${text}"
 
 REGOLE IMPORTANTI:
@@ -30,9 +30,9 @@ REGOLE IMPORTANTI:
 Testo convertito:`,
 
   "arabic-to-din": (text: string) => `
-Sei un esperto di traslitterazione araba secondo lo standard DIN 31635.
+Sei un esperto di trascrizione araba secondo lo standard DIN 31635.
 
-Converti il seguente testo arabo in traslitterazione DIN 31635:
+Converti il seguente testo arabo in trascrizione DIN 31635:
 "${text}"
 
 REGOLE IMPORTANTI:
@@ -44,7 +44,7 @@ REGOLE IMPORTANTI:
 Testo convertito:`,
 
   "latin-to-arabic": (text: string) => `
-Sei un esperto di lingua araba e traslitterazione.
+Sei un esperto di lingua araba e trascrizione.
 
 Converti il seguente testo latino in scrittura araba:
 "${text}"

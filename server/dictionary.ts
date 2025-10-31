@@ -1,5 +1,5 @@
 /**
- * Dizionario statico di termini islamici comuni con traslitterazione DIN 31635
+ * Dizionario statico di termini islamici comuni con trascrizione DIN 31635
  * Mappature: Latino → DIN 31635, Arabo → DIN 31635
  */
 
