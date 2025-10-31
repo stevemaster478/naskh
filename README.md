@@ -35,11 +35,23 @@ npm run dev
 API e client verranno serviti sul `PORT` configurato (dev: Express + Vite middleware).
 
 ### Script principali
+
+**Web Development:**
 - `npm run dev`: avvia server Express in modalità sviluppo con Vite
 - `npm run build`: build client (Vite) e bundle server (esbuild) in `dist/`
 - `npm run start`: avvia la build di produzione da `dist/`
 - `npm run check`: TypeScript type‑check
 - `npm run db:push`: applica lo schema Drizzle al database
+
+**Mobile Apps (Capacitor):**
+- `npm run cap:sync`: sincronizza web build con le app native (Android e iOS)
+- `npm run cap:sync:android`: sincronizza solo Android
+- `npm run cap:sync:ios`: sincronizza solo iOS
+- `npm run cap:open:android`: apri progetto Android in Android Studio
+- `npm run cap:open:ios`: apri progetto iOS in Xcode
+- `npm run cap:build:android`: build completo per Android
+- `npm run cap:build:ios`: build completo per iOS
+- `npm run cap:assets`: rigenera icone e splash screens
 
 ### Struttura del progetto (principale)
 - `server/index.ts`: bootstrap Express, logging richieste `/api`, error handler, integrazione Vite in dev
@@ -95,6 +107,33 @@ Note:
 ### CI/CD (suggerito)
 - Workflow: install → type‑check → lint → build → test → deploy
 - Cache dipendenze e artefatti; verifica `.env` richieste dal deploy target
+
+### App Native per Mobile (Android e iOS)
+
+Questo progetto supporta la creazione di app native per Android e iOS tramite **Capacitor**.
+
+**Setup iniziale:**
+Le piattaforme native sono già configurate nelle cartelle `android/` e `ios/`.
+
+**Workflow di sviluppo:**
+1. Sviluppa e testa l'app web normalmente con `npm run dev`
+2. Quando sei pronto per testare su mobile:
+   ```bash
+   npm run cap:build:android  # o cap:build:ios
+   npm run cap:open:android   # o cap:open:ios
+   ```
+3. Testa l'app in Android Studio o Xcode
+
+**Pubblicazione sugli Store:**
+Consulta la guida completa in [MOBILE_DEPLOYMENT.md](./MOBILE_DEPLOYMENT.md) per istruzioni dettagliate su come:
+- Configurare certificati e signing
+- Generare build per produzione (APK/AAB per Android, Archive per iOS)
+- Upload su Google Play Store e Apple App Store
+- Gestire aggiornamenti futuri
+
+**Requisiti per il deployment mobile:**
+- **Android**: Android Studio, Java JDK 17+, account Google Play Developer ($25 una tantum)
+- **iOS**: macOS, Xcode, CocoaPods, account Apple Developer ($99/anno)
 
 ### Avvio in produzione
 1) Build: `npm run build`
