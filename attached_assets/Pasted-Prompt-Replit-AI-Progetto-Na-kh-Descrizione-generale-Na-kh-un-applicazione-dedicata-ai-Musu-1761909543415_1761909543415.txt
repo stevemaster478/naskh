@@ -1,0 +1,147 @@
+Prompt Replit AI — Progetto Naṣkh
+
+📘 Descrizione generale
+
+Naṣkh è un’applicazione dedicata ai Musulmani salafiti in Italia — e successivamente destinata al mondo anglofono e arabo — che permette di correggere, convertire e traslitterare testi arabi e latini in conformità con lo standard DIN 31635.
+
+Lo scopo è fornire uno strumento linguistico islamico moderno, utile per studenti di ʿilm, traduttori, ricercatori e studenti di lingua araba che desiderano uniformare la scrittura delle parole arabe in caratteri latini o viceversa.
+
+🧩 Funzionalità principali
+
+Text box di inserimento dove l’utente può scrivere:
+
+Testo in caratteri latini (es. “hadith” o “rasoul”)
+
+Testo in caratteri arabi (es. “حديث”, “رسول”)
+
+Scelta della modalità di conversione:
+
+🔹 Correzione in standard DIN 31635 partendo da caratteri latini
+
+🔹 Conversione da arabo → DIN 31635
+
+🔹 Conversione da latino → arabo
+
+Risultato in tempo reale o su richiesta:
+
+Il testo corretto e traslitterato secondo DIN 31635 (es. ḥadīṯ, ṣalāh, ʿilm)
+
+Interfaccia moderna e responsiva:
+
+Supporto dark mode
+
+Scrittura RTL (right-to-left)
+
+Tipografia leggibile per arabo e latino
+
+Design pulito e minimalista
+
+🛠️ Stack tecnologico richiesto
+
+Frontend (mobile-first cross-platform):
+
+React Native (Expo) per Android e iOS
+
+TypeScript
+
+NativeWind (Tailwind CSS for React Native)
+
+Lucide Icons / Phosphor Icons
+
+Backend (inizialmente gratuito):
+
+Node.js + Express
+
+SQLite (inizialmente) o Supabase / NeonDB in free-tier
+
+Deployment gratuito: Render o Railway
+
+Frontend web (in futuro):
+
+React + Vite
+
+Vercel o Netlify
+
+AI/linguistica (fase successiva):
+
+Mappature manuali e regex per conversioni semplici
+
+Successivamente modello NLP per riconoscimento e autocorrezione
+
+🧱 Obiettivi MVP
+
+Interfaccia con input box, selezione modalità e output dinamico
+
+Conversioni funzionanti tra latino ↔ arabo ↔ DIN 31635
+
+Deploy gratuito funzionante
+
+Supporto RTL e UI in italiano
+
+💡 Visione futura
+
+Versione web accessibile da browser
+
+Estensione desktop (Electron/Tauri)
+
+OCR per estrarre testo arabo da immagini
+
+API pubblica per siti islamici, istituti o studenti
+
+Integrazione con dizionari e corpus arabi
+
+🎨 Design e stile
+
+Minimalista, elegante, ispirato all’estetica islamica moderna
+
+Palette: beige sabbia, verde oliva, grigio chiaro, oro tenue
+
+Font consigliati:
+
+Cairo o Amiri per arabo
+
+Inter o Source Sans Pro per latino
+
+Layout pulito, ampio spazio bianco, tipografia leggibile
+
+💰 Vincoli iniziali
+
+Tutti i servizi gratuiti:
+
+Hosting: Render / Vercel / Netlify (free plan)
+
+Database: SQLite o Supabase free-tier
+
+Dominio gratuito .onrender.com o .vercel.app
+
+🚀 Obiettivo finale
+
+Creare un’applicazione moderna e accessibile che combini:
+
+Precisione linguistica
+
+Rispetto per la lingua araba e la scienza islamica
+
+Tecnologia avanzata
+
+Design contemporaneo
+
+Autore: @niuffars su Telegram – GitHub: @stevemaster478 (includere icone cliccabili per pagina autore)
+
+⚠️ Questione AI per trascrizione
+
+Il problema principale riguarda la trascrizione in DIN 31635 da parole latine.
+
+Alcune parole arabe traslitterate in latino non seguono uno standard preciso (es. Salih, Ibrahim).
+
+Un dizionario statico o regole fonetiche coprono solo i casi più comuni.
+
+Per gestire nomi propri, termini religiosi o parole nuove, serve un modello AI/NLP capace di:
+
+Riconoscere se la parola è araba
+
+Applicare correttamente DIN 31635
+
+Lasciare invariati i termini estranei all’arabo
+
+L’AI deve poter integrare dizionari e regole fonetiche, generando trascrizioni accurate anche per parole non previste nel dizionario statico, senza alterare parole non arabe.
